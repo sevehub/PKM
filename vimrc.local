@@ -19,7 +19,7 @@ let g:netrw_keepdir= 0
 
 
 " wiki customization
-let g:wiki_root = expand("%:p:h").'\PKM'
+let g:wiki_root = expand("%:p:h") .'\PKM'
 let g:wiki_filetypes=["md"]
 let g:wiki_link_target_type='md'
 let g:wiki_index_name='PKMindex'
@@ -44,7 +44,8 @@ autocmd FileType calendar
       \ nnoremap <silent><buffer> <cr>
       \ :<c-u>call wiki#journal#open()<cr>
 augroup END
-
+let g:root_path = expand('%:p:h') . '/PKM/journal/**'
+set path+=g:root_path 
 
 " task
 abbr TK# &#128119;  
@@ -53,4 +54,7 @@ abbr EV# &#128197;
 " Note
 abbr NO# &#128210;  
 
-
+" Highlight text between [[...]] with a bluette color
+highlight BluetteColor ctermfg=81 guifg=#4e5a7b
+syntax match BluetteHighlight /\[\[\zs.\{-}\ze\]\]/
+highlight BluetteHighlight cterm=bold ctermfg=81 guifg=#4e5a7b

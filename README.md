@@ -13,4 +13,4 @@ Personal Knowledge Management (PKM) refers to the practice of organizing, captur
 ## Installation
 - Clone [Repository](https://github.com/sevehub/PKM)
 - Run init.ps1 from PowerShell terminal.
-
+- Install [Vim Lsp plugin](https://github.com/yegappan/lsp)
