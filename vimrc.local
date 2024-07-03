@@ -1,0 +1,56 @@
+let plugin_name = 'wiki.vim'
+let runtime_paths = split(&runtimepath, ',')
+let first_part = substitute(runtime_paths[1], '\\\zs[^\\]*$', '', '')
+if index(split(&runtimepath, ','), first_part .. plugin_name) >= 0
+    echom "Plugin " .. first_part .. plugin_name .. " found."
+else
+    echom "Plugin wiki.vim not installed"
+endif
+
+let g:netrw_banner = 0
+let g:netrw_list_hide = '\=/\=$,.marksman.toml,.DS_Store,vimrc.local,.git,__pycache__,venv,node_modules,*\.o,*\.pyc,.*\.swp'
+let g:netrw_hide = 1
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_liststyle = 4
+let g:netrw_menu =1
+let g:netrw_winsize = 20
+let g:netrw_keepdir= 0
+
+
+" wiki customization
+let g:wiki_root = expand("%:p:h").'\PKM'
+let g:wiki_filetypes=["md"]
+let g:wiki_link_target_type='md'
+let g:wiki_index_name='PKMindex'
+let g:wiki_mappings_use_defaults='all'
+let g:wiki_mappings_local = {
+            \ '<plug>(wiki-journal-prev)' : '<c-h>',
+            \ '<plug>(wiki-journal-next)' : '<c-l>',
+            \}                                                                                 
+
+
+let g:wiki_export = {
+      \ 'from_format' : 'markdown',
+      \ 'ext' : 'pdf',
+      \ 'link_ext_replace': v:false,
+      \ 'view' : v:false,
+      \ 'output': fnamemodify(tempname(), ':h'),
+      \}
+
+augroup init_calendar
+autocmd!
+autocmd FileType calendar
+      \ nnoremap <silent><buffer> <cr>
+      \ :<c-u>call wiki#journal#open()<cr>
+augroup END
+
+
+" task
+abbr TK# &#128119;  
+" event
+abbr EV# &#128197; 
+" Note
+abbr NO# &#128210;  
+
+
